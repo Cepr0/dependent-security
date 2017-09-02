@@ -37,22 +37,23 @@ public class Application {
 	@Bean
 	ApplicationRunner applicationRunner(BaseRepo repo) {
 		return args -> {
-			List<Room> rooms = repo.save(asList(
-					new Room(1, "description1"),
-					new Room(2, "description1"),
-					new Room(3, "description1"),
-					new Room(4, "description1"),
-					new Room(5, "description1")
+			List<Category> categories = repo.save(asList(
+					new Category("category1"),
+					new Category("category2")
 			));
 
-			List<Category> categories = repo.save(asList(
-					new Category("category1", rooms.subList(0, 2)),
-					new Category("category2", rooms.subList(2, 5))
+			List<Room> rooms = repo.save(asList(
+					new Room(1, "description1", categories.get(0)),
+					new Room(2, "description2", categories.get(0)),
+					new Room(3, "description3", categories.get(1)),
+					new Room(4, "description4", categories.get(1)),
+					new Room(5, "description5", categories.get(1))
 			));
 
 			repo.save(asList(
 					new User("user1", "123456", User.Role.ROLE_USER, singletonList(categories.get(0))),
-					new User("user2", "123456", User.Role.ROLE_USER, singletonList(categories.get(1)))
+					new User("user2", "123456", User.Role.ROLE_USER, singletonList(categories.get(1))),
+					new User("admin1", "123456", User.Role.ROLE_ADMIN, categories)
 			));
 		};
 	}

@@ -4,11 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.NaturalId;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.List;
 
@@ -23,18 +23,18 @@ import java.util.List;
 @Table(name = "users")
 public class User extends BaseEntity {
 
-	@Column(unique = true)
+	@NaturalId
 	private String name;
 
 	private String password;
 
 	private Role role;
 
-	@OneToMany
+	@ManyToMany
 	private List<Category> categories;
 
 	public enum Role implements GrantedAuthority {
-		ROLE_USER("User"), ROLE_ADMIN("Admin");
+		ROLE_USER("USER"), ROLE_ADMIN("ADMIN");
 
 		private String title;
 

@@ -7,6 +7,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 /**
  * @author Cepro, 2017-08-30
  */
-@RepositoryRestResource
+@RepositoryRestResource(exported = false)
 public interface RoomRepo extends JpaRepository<Room, Long> {
 }

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            font-size: 1em;
+            line-height: 1.5em;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 1em;
+        }
+        div {
+            padding-left: 1em;
+        }
+
+    </style>
+</head>
+<body>
+    <a href="/api">/api</a>
+
+    <p>Accesses:</p>
+
+    <ul>
+        <li><b>user1 / 123456</b>
+            <ul>
+                <li>category1
+                    <ul>
+                        <li>room1</li>
+                        <li>room2</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><b>user2 / 123456</b>
+            <ul>
+                <li>category2
+                    <ul>
+                        <li>room3</li>
+                        <li>room4</li>
+                        <li>room5</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><b>admin1 / 123456</b>
+            <ul>
+                <li>all categories and rooms</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p>Commands:</p>
+    <div>
+        <b>Get categories and their rooms:</b>
+        <pre>GET /api/categories</pre>
+
+        <b>Get room:</b>
+        <pre>GET /api/categories/1/rooms/1</pre>
+
+        <b>'Edit' room:</b>
+        <pre>PATCH /api/categories/1/rooms/1</pre>
+
+        <b>Booking room:</b>
+        <pre>PUT /api/categories/1/rooms/1/booking</pre>
+    </div>
+
+</body>
+</html>
