@@ -7,10 +7,9 @@ import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Cepro, 2017-08-31
@@ -28,7 +27,9 @@ public class User extends BaseEntity {
 
 	private String password;
 
-	private Role role;
+	@CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "user_id"))
+	@ElementCollection
+	private Set<Role> roles;
 
 	@ManyToMany
 	private List<Category> categories;

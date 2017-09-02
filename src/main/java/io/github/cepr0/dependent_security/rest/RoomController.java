@@ -21,26 +21,34 @@ public class RoomController {
 	private final EntityLinks entityLinks;
 
 	@GetMapping
-	public ResponseEntity<?> get(@PathVariable("roomId") Room room) {
-		return ResponseEntity.ok(toResource(room));
+	public ResponseEntity<?> get(@PathVariable("id") Long categoryId, @PathVariable("roomId") Room room) {
+		return room.getCategory().getId().compareTo(categoryId) == 0 ?
+				ResponseEntity.ok(toResource(room)) :
+				ResponseEntity.notFound().build();
 	}
 
 	/**
 	 * An example of editing the {@link Room}
 	 */
 	@PatchMapping
-	public ResponseEntity<?> patch(@PathVariable("roomId") Room target, @RequestBody Room source) {
-		target.setDescription(source.getDescription());
-		roomRepo.save(target);
-		return ResponseEntity.ok(toResource(target));
+	public ResponseEntity<?> patch(@PathVariable("id") Long categoryId, @PathVariable("roomId") Room target, @RequestBody Room source) {
+		if (target.getCategory().getId().compareTo(categoryId) == 0) {
+			target.setDescription(source.getDescription());
+			roomRepo.save(target);
+			return ResponseEntity.ok(toResource(target));
+		}
+		return ResponseEntity.notFound().build();
 	}
 
 	/**
 	 * An example of the booking request
 	 */
 	@PutMapping("/booking")
-	public ResponseEntity<?> book() {
-		return ResponseEntity.ok(new Resource<>("The room has been booked."));
+	public ResponseEntity<?> book(@PathVariable("id") Long categoryId, @PathVariable("roomId") Room room) {
+		if (room.getCategory().getId().compareTo(categoryId) == 0) {
+			return ResponseEntity.ok(new Resource<>("The room has been booked."));
+		}
+		return ResponseEntity.notFound().build();
 	}
 
 	private Resource<Room> toResource(Room room) {

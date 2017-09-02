@@ -23,7 +23,6 @@ import org.springframework.hateoas.Identifiable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
 
 /**
  * Base class for entity implementations. Uses a {@link Long} id.
@@ -39,9 +38,6 @@ public class BaseEntity implements Identifiable<Long> {
 	@Id
 	@GeneratedValue
 	private final Long id;
-
-	@Version
-	private Long version;
 
 	protected BaseEntity() {
 		this.id = null;

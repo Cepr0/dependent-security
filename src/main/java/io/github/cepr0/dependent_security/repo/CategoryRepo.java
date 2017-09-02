@@ -14,6 +14,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface CategoryRepo extends JpaRepository<Category, Long> {
 
 	@Override
-	@Query("select c from Category c where c.id in (" + "?#{@userRepo.getCategoryIdsByName(principal.username)}" + ")")
+	@Query("select c from Category c where c.id in (" + "?#{@userService.getAccessedCategoryIds(principal)}" + ")")
 	Page<Category> findAll(Pageable pageable);
 }

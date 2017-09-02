@@ -11,8 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.sql.SQLException;
+import java.util.EnumSet;
 import java.util.List;
 
+import static io.github.cepr0.dependent_security.model.User.Role.ROLE_ADMIN;
+import static io.github.cepr0.dependent_security.model.User.Role.ROLE_USER;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
@@ -51,9 +54,9 @@ public class Application {
 			));
 
 			repo.save(asList(
-					new User("user1", "123456", User.Role.ROLE_USER, singletonList(categories.get(0))),
-					new User("user2", "123456", User.Role.ROLE_USER, singletonList(categories.get(1))),
-					new User("admin1", "123456", User.Role.ROLE_ADMIN, categories)
+					new User("user1", "123456", EnumSet.of(ROLE_USER), singletonList(categories.get(0))),
+					new User("user2", "123456", EnumSet.of(ROLE_USER), singletonList(categories.get(1))),
+					new User("admin1", "123456", EnumSet.of(ROLE_USER, ROLE_ADMIN), categories)
 			));
 		};
 	}
